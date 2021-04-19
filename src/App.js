@@ -2,25 +2,29 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import './App.css';
 
-//testing axios and useEffect/useState
+//testing axios and connection with rails server 
 const App = () => {
+  
   useEffect(() => {
     axios.get('/api/jobpostings')
-        .then(res => setJobPostings(res.data))
+      .then (res => console.log(res.data))
+        .then(res => setJobpostings(res.data))
         .catch(error => console.log(error))
   }, []);
 
-  const [jobpostings, setJobPostings] = useState([]);
+  const [jobpostings, setJobpostings] = useState([]);
+
+  console.log(jobpostings)
 
   return (
       <div className="App">
         <h2>Current Jobs:</h2>
         <div>
           <ul>
-            {jobpostings.map((b,idx) => {
+            {jobpostings.map((jp) => {
               return (
                   <li>
-                    {idx}. {b}
+                    {jp.company}
                   </li>
               )
             })}
